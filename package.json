@@ -1,0 +1,19 @@
+{
+  "name": "@sueka/q",
+  "version": "0.1.0",
+  "description": "A ℚ library",
+  "main": "index.js",
+  "scripts": {
+    "test": "make check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sueka/q.git"
+  },
+  "author": "Sueka",
+  "license": "MIT-0",
+  "bugs": {
+    "url": "https://github.com/sueka/q/issues"
+  },
+  "homepage": "https://github.com/sueka/q#readme"
+}
