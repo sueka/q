@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/sueka/q/issues"
   },
-  "homepage": "https://github.com/sueka/q#readme"
+  "homepage": "https://github.com/sueka/q#readme",
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
 }
