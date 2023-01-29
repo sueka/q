@@ -10,6 +10,8 @@ export default class Q {
     assert(de !== 0n)
   }
 
+  static ONE = new Q(1n)
+
   /**
    * Calculates a total of `this` and `that`.
    *
@@ -50,6 +52,33 @@ export default class Q {
   }
 
   /**
+   * Raises `this` to the power of `that`.
+   *
+   * @remarks This method sees 0⁰ = 1
+   *
+   * @param that the exponent
+   * @returns the reduced power
+   */
+  toPowerOf(this: Q, that: number): Q {
+    if (! Number.isInteger(that)) {
+      throw new Error('Real exponents not supported.')
+    }
+
+    if (! Number.isSafeInteger(that)) {
+      console.warn()
+    }
+
+    if (that < 0) {
+      return this.toPowerOf(-that).reciprocal
+    }
+
+    const nu = this.nu ** BigInt(that)
+    const de = this.de ** BigInt(that)
+
+    return new Q(nu, de).reduced
+  }
+
+  /**
    * Calculates a quatient of `this` divided by `that`.
    *
    * @param that the divisor
@@ -60,6 +89,10 @@ export default class Q {
     const de = this.de * that.nu
 
     return new Q(nu, de).reduced
+  }
+
+  get reciprocal() {
+    return Q.ONE.dividedBy(this)
   }
 
   get reduced() {

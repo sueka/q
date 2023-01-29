@@ -1,7 +1,7 @@
 export default function gcd(a: bigint, b: bigint): bigint {
-  if (b === 0n) {
-    return a
+  while (b !== 0n) {
+    [a, b] = [b, a % b]
   }
 
-  return gcd(b, a % b)
+  return a
 }
