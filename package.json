@@ -4,6 +4,7 @@
   "description": "A ℚ library",
   "main": "dist/index.js",
   "scripts": {
+    "build": "make",
     "test": "make check"
   },
   "repository": {
