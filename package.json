@@ -2,7 +2,7 @@
   "name": "@sueka/q",
   "version": "0.1.0",
   "description": "A ℚ library",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "make check"
   },
