@@ -1,6 +1,6 @@
 {
   "name": "@sueka/q",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A ℚ library",
   "main": "dist/index.js",
   "scripts": {
@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/sueka/q#readme",
   "dependencies": {
+    "@types/node": "ts4.9",
     "typescript": "^4.9.4"
   },
   "devDependencies": {
