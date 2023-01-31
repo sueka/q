@@ -11,6 +11,7 @@ export default class Q {
     assert(de !== 0n)
   }
 
+  static ZERO = new Q(0n)
   static ONE = new Q(1n)
 
   /**
@@ -92,7 +93,15 @@ export default class Q {
     return new Q(nu, de).reduced
   }
 
+  equals(that: Q): boolean {
+    return that.de * this.nu === this.de * that.nu
+  }
+
   get reciprocal() {
+    if (this.equals(Q.ZERO)) {
+      throw new Error('Reciprocal of zero does not exist.')
+    }
+
     return Q.ONE.dividedBy(this)
   }
 
