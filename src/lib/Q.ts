@@ -20,9 +20,14 @@ export default class Q {
    * @param that
    * @returns the reduced total
    */
-  plus(that: Q): Q {
-    const nu = that.de * this.nu + this.de * that.nu
-    const de = this.de * that.de
+  plus(that: Q): Q
+  plus(that: bigint): Q
+  plus(that: Q | bigint): Q {
+    const augend = this
+    const addend = (typeof that !== 'bigint') ? that : new Q(that)
+
+    const nu = addend.de * augend.nu + augend.de * addend.nu
+    const de = augend.de * addend.de
 
     return new Q(nu, de).reduced
   }

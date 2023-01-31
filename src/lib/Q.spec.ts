@@ -37,6 +37,10 @@ describe('Q', () => {
       expect(oneHalf.times(twoFifths)).toMatchObject({ nu: 1n, de: 5n })
       expect(oneHalf.dividedBy(twoFifths)).toMatchObject({ nu: 5n, de: 4n })
     })
+
+    it('works with bigint', () => {
+      expect(Q.of(1n, 2n).plus(4n)).toEqual({ nu: 9n, de: 2n })
+    })
   })
 
   describe('toPowerOf()', () => {
