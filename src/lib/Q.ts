@@ -1,6 +1,7 @@
 import * as assert from 'assert'
 import abs from './abs'
 import gcd from './gcd'
+import parse from './parse'
 
 export default class Q {
   private constructor (
@@ -103,7 +104,37 @@ export default class Q {
     return result
   }
 
+  /**
+   * Constructs a Q object.
+   *
+   * @param nu the numerator
+   * @param de the denominator
+   * @returns the reduced fraction `nu` over `de`
+   */
   static of(nu: bigint, de?: bigint): Q {
+    return new Q(nu, de).reduced
+  }
+
+  /**
+   * Constructs a Q object.
+   *
+   * @param double
+   * @returns the reduced fraction equal to `double`
+   */
+  static from(double: number): Q {
+    const {
+      sign = '+',
+      integer,
+      decimal = '',
+      exponent = '+0'
+    } = parse(double)
+
+    const base = BigInt(`${ sign }${ integer }${ decimal }`)
+    const ex = Number(exponent) - decimal.length
+
+    const nu = (ex > 0 ? 10n ** BigInt( ex) : 1n) * base
+    const de = (ex < 0 ? 10n ** BigInt(-ex) : 1n)
+
     return new Q(nu, de).reduced
   }
 }

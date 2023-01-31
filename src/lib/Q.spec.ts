@@ -15,6 +15,18 @@ describe('Q', () => {
     })
   })
 
+  describe('Q.from() the factory method', () => {
+    it('converts floats to rationals', () => {
+      expect(Q.from(3.14)).toMatchObject({ nu: 157n, de: 50n })
+      expect(Q.from(6.62607015e-34)).toMatchObject({ nu: 132521403n, de: 2n * 10n ** 41n })
+    })
+
+    it('fails with a non-finite argument', () => {
+      expect(() => Q.from(NaN)).toThrowError()
+      expect(() => Q.from(Infinity)).toThrowError()
+    })
+  })
+
   describe('plus(), minus(), times() and dividedBy()', () => {
     it('works', () => {
       const oneHalf = Q.of(1n, 2n)
