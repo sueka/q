@@ -29,13 +29,10 @@ describe('Q', () => {
 
   describe('plus(), minus(), times() and dividedBy()', () => {
     it('works', () => {
-      const oneHalf = Q.of(1n, 2n)
-      const twoFifths = Q.of(2n, 5n)
-
-      expect(oneHalf.plus(twoFifths)).toMatchObject({ nu: 9n, de: 10n })
-      expect(oneHalf.minus(twoFifths)).toMatchObject({ nu: 1n, de: 10n })
-      expect(oneHalf.times(twoFifths)).toMatchObject({ nu: 1n, de: 5n })
-      expect(oneHalf.dividedBy(twoFifths)).toMatchObject({ nu: 5n, de: 4n })
+      expect(Q.of(1n, 2n).plus(Q.of(2n, 5n))).toMatchObject({ nu: 9n, de: 10n })
+      expect(Q.of(1n, 2n).minus(Q.of(2n, 5n))).toMatchObject({ nu: 1n, de: 10n })
+      expect(Q.of(1n, 2n).times(Q.of(2n, 5n))).toMatchObject({ nu: 1n, de: 5n })
+      expect(Q.of(1n, 2n).dividedBy(Q.of(2n, 5n))).toMatchObject({ nu: 5n, de: 4n })
     })
 
     it('works with bigint', () => {
