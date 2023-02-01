@@ -14,20 +14,33 @@ export default class Q {
   static ZERO = new Q(0n)
   static ONE = new Q(1n)
 
+  plus(that: Q): Q
+  plus(that: bigint): Q
+
   /**
    * Calculates a total of `this` and `that`.
    *
    * @param that
    * @returns the reduced total
    */
-  plus(that: Q): Q
-  plus(that: bigint): Q
   plus(that: Q | bigint): Q {
-    const augend = this
-    const addend = (typeof that !== 'bigint') ? that : new Q(that)
+    if (that instanceof Q) {
+      return this.#plusQ(that)
+    }
 
-    const nu = addend.de * augend.nu + augend.de * addend.nu
-    const de = augend.de * addend.de
+    return this.#plusZ(that)
+  }
+
+  #plusQ(that: Q): Q {
+    const nu = that.de * this.nu + this.de * that.nu
+    const de = this.de * that.de
+
+    return new Q(nu, de).reduced
+  }
+
+  #plusZ(that: bigint): Q {
+    const nu = this.nu + this.de * that
+    const de = this.de
 
     return new Q(nu, de).reduced
   }
