@@ -179,16 +179,16 @@ export default class Q {
   /**
    * Constructs a Q object.
    *
-   * @param double
-   * @returns the reduced fraction equal to `double`
+   * @param real
+   * @returns the reduced fraction equal to `real`
    */
-  static from(double: number): Q {
+  static from(real: number): Q {
     const {
       sign = '+',
       integer,
       decimal = '',
       exponent = '+0'
-    } = parse(double)
+    } = parse(real)
 
     const base = BigInt(`${ sign }${ integer }${ decimal }`)
     const ex = Number(exponent) - decimal.length
