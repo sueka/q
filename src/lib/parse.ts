@@ -9,7 +9,7 @@ interface ParseResult {
 }
 
 export default function parse(a: NumberString): ParseResult {
-  const pattern = /^(?<sign>-)?(?<integer>\d+)(\.(?<decimal>\d+))?(e(?<exponent>(\+|-)\d+))?$/
+  const pattern = /^(?<sign>\+|-)?(?<integer>\d+)(\.(?<decimal>\d+))?(e(?<exponent>(\+|-)?\d+))?$/
   const result = pattern.exec(a)
 
   shouldBe(result?.groups) // NaN, Infinity and -Infinity
@@ -19,7 +19,7 @@ export default function parse(a: NumberString): ParseResult {
   const { sign, integer, decimal, exponent } = result.groups
 
   shouldBe(integer) // Integer part should exist.
-  assert(sign != null ? sign === '-' : true) // '-' if any
+  assert(sign != null ? sign === '+' || sign === '-' : true) // '-' or '-' if any
 
   return { sign, integer, decimal, exponent } as ParseResult
 }
