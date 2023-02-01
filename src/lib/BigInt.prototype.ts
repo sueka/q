@@ -2,13 +2,13 @@ import Q from './Q'
 
 declare global {
   interface BigInt {
-    plus: Inverse<Q['plus']>
+    plus(that: Q): Q
   }
 }
 
 Object.defineProperties(BigInt.prototype, {
   plus: {
-    value(that: Q) {
+    value(this: bigint, that: Q) {
       return that.plus(this)
     },
   },
