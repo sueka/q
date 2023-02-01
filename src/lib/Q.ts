@@ -169,6 +169,43 @@ export default class Q {
     return this.nu === this.de * that
   }
 
+  notEqualTo(that: Q | bigint): boolean {
+    return ! this.equals(that)
+  }
+
+  lessThan(that: Q | bigint): boolean {
+    if (that instanceof Q) {
+      return this.#lessThanQ(that)
+    }
+
+    return this.#lessThanZ(that)
+  }
+
+  #lessThanQ(that: Q): boolean {
+    return that.de * this.nu < this.de * that.nu
+  }
+
+  #lessThanZ(that: bigint): boolean {
+    return this.nu < this.de * that
+  }
+
+  lessThanOrEqualTo(that: Q | bigint): boolean {
+    return ! this.greaterThan(that)
+  }
+
+  greaterThan(that: Q | bigint): boolean {
+    if (that instanceof Q) {
+      return that.lessThan(this)
+    }
+
+    // NOTE: new Q(numer) is already reduced.
+    return new Q(that).lessThan(this)
+  }
+
+  greaterThanOrEqualTo(that: Q | bigint): boolean {
+    return ! this.lessThan(that)
+  }
+
   get reciprocal() {
     if (this.equals(Q.ZERO)) {
       throw new Error('Reciprocal of zero does not exist.')
