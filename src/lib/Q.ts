@@ -22,6 +22,18 @@ export default class Q {
     return `${ this.nu }/${ this.de }`
   }
 
+  // NOTE: It throws an error rather than returns zero when `nu` is finite and `de` equals `Infinity`.
+  toDouble() {
+    const nu = Number(this.nu)
+    const de = Number(this.de)
+
+    if (! (Number.isFinite(nu) && Number.isFinite(de) && Number.isFinite(nu / de))) {
+      throw new Error('Numerator or denominator too large.')
+    }
+
+    return nu / de
+  }
+
   /**
    * Calculates a total of `this` and `that`.
    *
