@@ -110,12 +110,20 @@ export default class Q {
     return Q.ONE.dividedBy(this)
   }
 
+  /**
+   * Reduces `this` to its lowest terms. Ensures the denominator ≥ one.
+   *
+   * @returns the reduced
+   */
   get reduced() {
     const deSign = (this.de < 0n) ? -1n : 1n
     const d = deSign * abs(gcd(this.nu, this.de))
-    const result = new Q(this.nu / d, this.de / d)
+    const nu = this.nu / d
+    const de = this.de / d
 
-    return result
+    assert(de >= 1n)
+
+    return new Q(nu, de)
   }
 
   /**
