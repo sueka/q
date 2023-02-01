@@ -14,6 +14,14 @@ export default class Q {
   static ZERO = new Q(0n)
   static ONE = new Q(1n)
 
+  toString() {
+    if (this.de === 1n) {
+      return `${ this.nu }`
+    }
+
+    return `${ this.nu }/${ this.de }`
+  }
+
   /**
    * Calculates a total of `this` and `that`.
    *
