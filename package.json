@@ -2,7 +2,10 @@
   "name": "@sueka/q",
   "version": "0.9.1",
   "description": "A ℚ library",
-  "files": [ "dist", "src" ],
+  "files": [
+    "dist",
+    "src"
+  ],
   "main": "dist/index.js",
   "scripts": {
     "build": "make",
@@ -27,6 +30,7 @@
     "chalk": "^4.1.2",
     "jest": "^29.4.1",
     "jest-matcher-utils": "^29.4.1",
-    "ts-jest": "^29.0.5"
+    "ts-jest": "^29.0.5",
+    "typedoc": "^0.23.24"
   }
 }

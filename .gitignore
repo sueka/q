@@ -5,3 +5,7 @@
 
 # tsc
 *.js
+
+# typedoc
+/docs/
+!/typedoc.js
