@@ -34,10 +34,6 @@ describe('Q', () => {
       expect(Q.of(1n, 2n).times(Q.of(2n, 5n))).toMatchObject({ nu: 1n, de: 5n })
       expect(Q.of(1n, 2n).dividedBy(Q.of(2n, 5n))).toMatchObject({ nu: 5n, de: 4n })
     })
-
-    it('works with bigint', () => {
-      expect(Q.of(1n, 2n).plus(4n)).toEqual({ nu: 9n, de: 2n })
-    })
   })
 
   describe('toPowerOf()', () => {

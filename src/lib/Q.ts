@@ -20,24 +20,9 @@ export default class Q {
    * @param that
    * @returns the reduced total
    */
-  plus(that: Q | bigint): Q {
-    if (that instanceof Q) {
-      return this.#plusQ(that)
-    }
-
-    return this.#plusZ(that)
-  }
-
-  #plusQ(that: Q): Q {
+  plus(that: Q): Q {
     const nu = that.de * this.nu + this.de * that.nu
     const de = this.de * that.de
-
-    return new Q(nu, de).reduced
-  }
-
-  #plusZ(that: bigint): Q {
-    const nu = this.nu + this.de * that
-    const de = this.de
 
     return new Q(nu, de).reduced
   }
@@ -48,24 +33,9 @@ export default class Q {
    * @param that the subtrahend
    * @returns the reduced difference
    */
-  minus(that: Q | bigint): Q {
-    if (that instanceof Q) {
-      return this.#minusQ(that)
-    }
-
-    return this.#minusZ(that)
-  }
-
-  #minusQ(that: Q): Q {
+  minus(that: Q): Q {
     const nu = that.de * this.nu - this.de * that.nu
     const de = this.de * that.de
-
-    return new Q(nu, de).reduced
-  }
-
-  #minusZ(that: bigint): Q {
-    const nu = this.nu - this.de * that
-    const de = this.de
 
     return new Q(nu, de).reduced
   }
@@ -76,24 +46,9 @@ export default class Q {
    * @param that
    * @returns the reduced product
    */
-  times(that: Q | bigint): Q {
-    if (that instanceof Q) {
-      return this.#timesQ(that)
-    }
-
-    return this.#timesZ(that)
-  }
-
-  #timesQ(that: Q): Q {
+  times(that: Q): Q {
     const nu = this.nu * that.nu
     const de = this.de * that.de
-
-    return new Q(nu, de).reduced
-  }
-
-  #timesZ(that: bigint): Q {
-    const nu = this.nu * that
-    const de = this.de
 
     return new Q(nu, de).reduced
   }
@@ -131,78 +86,34 @@ export default class Q {
    * @param that the divisor
    * @returns the reduced quatient
    */
-  dividedBy(that: Q | bigint): Q {
-    if (that instanceof Q) {
-      return this.#dividedByQ(that)
-    }
-
-    return this.#dividedByZ(that)
-  }
-
-  #dividedByQ(that: Q): Q {
+  dividedBy(that: Q): Q {
     const nu = this.nu * that.de
     const de = this.de * that.nu
 
     return new Q(nu, de).reduced
   }
 
-  #dividedByZ(that: bigint): Q {
-    const nu = this.nu
-    const de = this.de * that
-
-    return new Q(nu, de).reduced
-  }
-
-  equals(that: Q | bigint): boolean {
-    if (that instanceof Q) {
-      return this.#equalsQ(that)
-    }
-
-    return this.#equalsZ(that)
-  }
-
-  #equalsQ(that: Q): boolean {
+  equals(that: Q): boolean {
     return that.de * this.nu === this.de * that.nu
   }
 
-  #equalsZ(that: bigint): boolean {
-    return this.nu === this.de * that
-  }
-
-  notEqualTo(that: Q | bigint): boolean {
+  notEqualTo(that: Q): boolean {
     return ! this.equals(that)
   }
 
-  lessThan(that: Q | bigint): boolean {
-    if (that instanceof Q) {
-      return this.#lessThanQ(that)
-    }
-
-    return this.#lessThanZ(that)
-  }
-
-  #lessThanQ(that: Q): boolean {
+  lessThan(that: Q): boolean {
     return that.de * this.nu < this.de * that.nu
   }
 
-  #lessThanZ(that: bigint): boolean {
-    return this.nu < this.de * that
-  }
-
-  lessThanOrEqualTo(that: Q | bigint): boolean {
+  lessThanOrEqualTo(that: Q): boolean {
     return ! this.greaterThan(that)
   }
 
-  greaterThan(that: Q | bigint): boolean {
-    if (that instanceof Q) {
-      return that.lessThan(this)
-    }
-
-    // NOTE: new Q(numer) is already reduced.
-    return new Q(that).lessThan(this)
+  greaterThan(that: Q): boolean {
+    return that.lessThan(this)
   }
 
-  greaterThanOrEqualTo(that: Q | bigint): boolean {
+  greaterThanOrEqualTo(that: Q): boolean {
     return ! this.lessThan(that)
   }
 
