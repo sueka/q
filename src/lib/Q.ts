@@ -14,9 +14,6 @@ export default class Q {
   static ZERO = new Q(0n)
   static ONE = new Q(1n)
 
-  plus(that: Q): Q
-  plus(that: bigint): Q
-
   /**
    * Calculates a total of `this` and `that`.
    *
@@ -45,9 +42,6 @@ export default class Q {
     return new Q(nu, de).reduced
   }
 
-  minus(that: Q): Q
-  minus(that: bigint): Q
-
   /**
    * Calculates a difference between `this` and `that`.
    *
@@ -75,9 +69,6 @@ export default class Q {
 
     return new Q(nu, de).reduced
   }
-
-  times(that: Q): Q
-  times(that: bigint): Q
 
   /**
    * Calculates a product of `this` and `that`.
@@ -134,9 +125,6 @@ export default class Q {
     return new Q(nu, de).reduced
   }
 
-  dividedBy(that: Q): Q
-  dividedBy(that: bigint): Q
-
   /**
    * Calculates a quatient of `this` divided by `that`.
    *
@@ -165,8 +153,6 @@ export default class Q {
     return new Q(nu, de).reduced
   }
 
-  equals(that: Q): boolean
-  equals(that: bigint): boolean
   equals(that: Q | bigint): boolean {
     if (that instanceof Q) {
       return this.#equalsQ(that)
