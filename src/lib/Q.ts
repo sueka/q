@@ -137,6 +137,10 @@ export default class Q {
     return Q.ONE.dividedBy(this)
   }
 
+  get opposite() {
+    return new Q(-1n).times(this)
+  }
+
   /**
    * Reduces `this` to its lowest terms. Ensures the denominator ≥ one.
    *
