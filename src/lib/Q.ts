@@ -45,18 +45,39 @@ export default class Q {
     return new Q(nu, de).reduced
   }
 
+  minus(that: Q): Q
+  minus(that: bigint): Q
+
   /**
    * Calculates a difference between `this` and `that`.
    *
    * @param that the subtrahend
    * @returns the reduced difference
    */
-  minus(that: Q): Q {
+  minus(that: Q | bigint): Q {
+    if (that instanceof Q) {
+      return this.#minusQ(that)
+    }
+
+    return this.#minusZ(that)
+  }
+
+  #minusQ(that: Q): Q {
     const nu = that.de * this.nu - this.de * that.nu
     const de = this.de * that.de
 
     return new Q(nu, de).reduced
   }
+
+  #minusZ(that: bigint): Q {
+    const nu = this.nu - this.de * that
+    const de = this.de
+
+    return new Q(nu, de).reduced
+  }
+
+  times(that: Q): Q
+  times(that: bigint): Q
 
   /**
    * Calculates a product of `this` and `that`.
@@ -64,9 +85,24 @@ export default class Q {
    * @param that
    * @returns the reduced product
    */
-  times(that: Q): Q {
+  times(that: Q | bigint): Q {
+    if (that instanceof Q) {
+      return this.#timesQ(that)
+    }
+
+    return this.#timesZ(that)
+  }
+
+  #timesQ(that: Q): Q {
     const nu = this.nu * that.nu
     const de = this.de * that.de
+
+    return new Q(nu, de).reduced
+  }
+
+  #timesZ(that: bigint): Q {
+    const nu = this.nu * that
+    const de = this.de
 
     return new Q(nu, de).reduced
   }
@@ -98,15 +134,33 @@ export default class Q {
     return new Q(nu, de).reduced
   }
 
+  dividedBy(that: Q): Q
+  dividedBy(that: bigint): Q
+
   /**
    * Calculates a quatient of `this` divided by `that`.
    *
    * @param that the divisor
    * @returns the reduced quatient
    */
-  dividedBy(that: Q) {
+  dividedBy(that: Q | bigint): Q {
+    if (that instanceof Q) {
+      return this.#dividedByQ(that)
+    }
+
+    return this.#dividedByZ(that)
+  }
+
+  #dividedByQ(that: Q): Q {
     const nu = this.nu * that.de
     const de = this.de * that.nu
+
+    return new Q(nu, de).reduced
+  }
+
+  #dividedByZ(that: bigint): Q {
+    const nu = this.nu
+    const de = this.de * that
 
     return new Q(nu, de).reduced
   }
