@@ -178,4 +178,28 @@ export default class Q {
 
     return new Q(nu, de).reduced
   }
+
+  // Aliases
+  add(that: Q): Q { return this.plus(that) }
+  sub(that: Q): Q { return this.minus(that) }
+  mul(that: Q): Q { return this.times(that) }
+  pow(that: number): Q { return this.toPowerOf(that) }
+  div(that: Q): Q { return this.dividedBy(that) }
+  eq(that: Q): boolean { return this.equals(that) }
+  ne(that: Q): boolean { return this.notEqualTo(that) }
+  lt(that: Q): boolean { return this.lessThan(that) }
+  lte(that: Q): boolean { return this.lessThanOrEqualTo(that) }
+  gt(that: Q): boolean { return this.greaterThan(that) }
+  gte(that: Q): boolean { return this.greaterThanOrEqualTo(that) }
+  ['+'](that: Q): Q { return this.plus(that) }
+  ['-'](that: Q): Q { return this.minus(that) }
+  ['*'](that: Q): Q { return this.times(that) }
+  ['**'](that: number): Q { return this.toPowerOf(that) }
+  ['/'](that: Q): Q { return this.dividedBy(that) }
+  ['==='](that: Q): boolean { return this.equals(that) }
+  ['!=='](that: Q): boolean { return this.notEqualTo(that) }
+  ['<'](that: Q): boolean { return this.lessThan(that) }
+  ['<='](that: Q): boolean { return this.lessThanOrEqualTo(that) }
+  ['>'](that: Q): boolean { return this.greaterThan(that) }
+  ['>='](that: Q): boolean { return this.greaterThanOrEqualTo(that) }
 }
