@@ -188,7 +188,7 @@ export default class Q {
       integer,
       decimal = '',
       exponent = '+0'
-    } = parse(real)
+    } = parse(String(real))
 
     const base = BigInt(`${ sign }${ integer }${ decimal }`)
     const ex = Number(exponent) - decimal.length

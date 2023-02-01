@@ -8,9 +8,9 @@ interface ParseResult {
   exponent?: `${ '+' | '-' }${ string }` // from -324 to +308 except from -6 to +20
 }
 
-export default function parse(a: number): ParseResult {
+export default function parse(a: NumberString): ParseResult {
   const pattern = /(?<sign>-)?(?<integer>\d+)(\.(?<decimal>\d+))?(e(?<exponent>(\+|-)\d+))?/
-  const result = pattern.exec(String(a))
+  const result = pattern.exec(a)
 
   shouldBe(result?.groups) // NaN, Infinity and -Infinity
 
