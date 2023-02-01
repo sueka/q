@@ -14,9 +14,9 @@ export default function parse(a: NumberString): ParseResult {
 
   shouldBe(result?.groups) // NaN, Infinity and -Infinity
 
-  const { sign, integer, decimal, exponent } = result.groups
-
   // TODO: Replace the below with `return result.groups as ParseResult`.
+
+  const { sign, integer, decimal, exponent } = result.groups
 
   shouldBe(integer) // Integer part should exist.
   assert(sign != null ? sign === '-' : true) // '-' if any
