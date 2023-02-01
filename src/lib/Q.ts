@@ -97,24 +97,24 @@ export default class Q {
     return that.de * this.nu === this.de * that.nu
   }
 
-  notEqualTo(that: Q): boolean {
+  isNotEqualTo(that: Q): boolean {
     return ! this.equals(that)
   }
 
-  lessThan(that: Q): boolean {
+  isLessThan(that: Q): boolean {
     return that.de * this.nu < this.de * that.nu
   }
 
-  lessThanOrEqualTo(that: Q): boolean {
-    return ! this.greaterThan(that)
+  isLessThanOrEqualTo(that: Q): boolean {
+    return ! this.isGreaterThan(that)
   }
 
-  greaterThan(that: Q): boolean {
-    return that.lessThan(this)
+  isGreaterThan(that: Q): boolean {
+    return that.isLessThan(this)
   }
 
-  greaterThanOrEqualTo(that: Q): boolean {
-    return ! this.lessThan(that)
+  isGreaterThanOrEqualTo(that: Q): boolean {
+    return ! this.isLessThan(that)
   }
 
   get reciprocal() {
@@ -186,20 +186,20 @@ export default class Q {
   pow(that: number): Q { return this.toPowerOf(that) }
   div(that: Q): Q { return this.dividedBy(that) }
   eq(that: Q): boolean { return this.equals(that) }
-  ne(that: Q): boolean { return this.notEqualTo(that) }
-  lt(that: Q): boolean { return this.lessThan(that) }
-  lte(that: Q): boolean { return this.lessThanOrEqualTo(that) }
-  gt(that: Q): boolean { return this.greaterThan(that) }
-  gte(that: Q): boolean { return this.greaterThanOrEqualTo(that) }
+  ne(that: Q): boolean { return this.isNotEqualTo(that) }
+  lt(that: Q): boolean { return this.isLessThan(that) }
+  lte(that: Q): boolean { return this.isLessThanOrEqualTo(that) }
+  gt(that: Q): boolean { return this.isGreaterThan(that) }
+  gte(that: Q): boolean { return this.isGreaterThanOrEqualTo(that) }
   ['+'](that: Q): Q { return this.plus(that) }
   ['-'](that: Q): Q { return this.minus(that) }
   ['*'](that: Q): Q { return this.times(that) }
   ['**'](that: number): Q { return this.toPowerOf(that) }
   ['/'](that: Q): Q { return this.dividedBy(that) }
   ['==='](that: Q): boolean { return this.equals(that) }
-  ['!=='](that: Q): boolean { return this.notEqualTo(that) }
-  ['<'](that: Q): boolean { return this.lessThan(that) }
-  ['<='](that: Q): boolean { return this.lessThanOrEqualTo(that) }
-  ['>'](that: Q): boolean { return this.greaterThan(that) }
-  ['>='](that: Q): boolean { return this.greaterThanOrEqualTo(that) }
+  ['!=='](that: Q): boolean { return this.isNotEqualTo(that) }
+  ['<'](that: Q): boolean { return this.isLessThan(that) }
+  ['<='](that: Q): boolean { return this.isLessThanOrEqualTo(that) }
+  ['>'](that: Q): boolean { return this.isGreaterThan(that) }
+  ['>='](that: Q): boolean { return this.isGreaterThanOrEqualTo(that) }
 }
