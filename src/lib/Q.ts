@@ -98,8 +98,22 @@ export default class Q {
     return new Q(nu, de).reduced
   }
 
-  equals(that: Q): boolean {
+  equals(that: Q): boolean
+  equals(that: bigint): boolean
+  equals(that: Q | bigint): boolean {
+    if (that instanceof Q) {
+      return this.#equalsQ(that)
+    }
+
+    return this.#equalsZ(that)
+  }
+
+  #equalsQ(that: Q): boolean {
     return that.de * this.nu === this.de * that.nu
+  }
+
+  #equalsZ(that: bigint): boolean {
+    return this.nu === this.de * that
   }
 
   get reciprocal() {
