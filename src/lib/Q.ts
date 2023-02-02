@@ -247,11 +247,13 @@ export default class Q {
 
   static #fromRepeating(repeating: string): Q {
     const {
+      sign = '+',
       integer,
       decimal,
       repetend,
     } = parseRd(repeating)
 
+    const s = BigInt(`${ sign }1`)
     const term = Number(`${ integer }.${ decimal }`)
 
     if (repetend === undefined) {
@@ -265,7 +267,7 @@ export default class Q {
       de: BigInt(10 ** decimal.length * (10 ** repetend.length - 1)),
     }
 
-    return Q.#fromR(term).plus(Q.of(repeat))
+    return new Q(s).times(Q.#fromR(term).plus(Q.of(repeat)))
   }
 
   // Aliases
