@@ -2,10 +2,10 @@ import * as assert from 'assert'
 import shouldBe from './shouldBe'
 
 interface ParseResult {
-  sign?: '-'
+  sign?: '+' | '-'
   integer: string // decimal natural with no leading zeros
-  decimal?: string // decimal natural (leading zeros can occur.)
-  exponent?: `${ '+' | '-' }${ string }` // from -324 to +308 except from -6 to +20
+  decimal?: string // digits (leading zeros can occur.)
+  exponent?: string // from -324 to +308 except from -6 to +20
 }
 
 export default function parse(real: NumberString): ParseResult {
