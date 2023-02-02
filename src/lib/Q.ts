@@ -3,10 +3,15 @@ import abs from './abs'
 import gcd from './gcd'
 import parse from './parse'
 
+interface QLike {
+  nu: bigint
+  de: bigint
+}
+
 export default class Q {
   private constructor (
-    private nu: bigint,
-    private de: bigint = 1n
+    readonly nu: bigint,
+    readonly de: bigint = 1n
   ) {
     assert(de !== 0n)
   }
@@ -172,8 +177,30 @@ export default class Q {
    * @param de the denominator
    * @returns the reduced fraction `nu` over `de`
    */
-  static of(nu: bigint, de?: bigint): Q {
+  static of(nu: bigint, de?: bigint): Q
+
+  /**
+   * Constructs a Q object.
+   *
+   * @param q the Q-like object
+   * @returns the reduced fraction of the Q object
+   */
+  static of(q: QLike): Q
+
+  static of(nuQ: bigint | QLike, de?: bigint) {
+    if (typeof nuQ === 'bigint') {
+      return this.#ofNuDe(nuQ, de)
+    }
+
+    return this.#ofQLike(nuQ)
+  }
+
+  static #ofNuDe(nu: bigint, de?: bigint): Q {
     return new Q(nu, de).reduced
+  }
+
+  static #ofQLike(q: QLike): Q {
+    return new Q(q.nu, q.de).reduced
   }
 
   /**
