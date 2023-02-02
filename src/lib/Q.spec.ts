@@ -28,6 +28,7 @@ describe('Q', () => {
 
     it('converts repeating decimals to rationals', () => {
       expect(Q.from('0.1(142857)')).toEqual({ nu: 4n, de: 35n })
+      expect(Q.from('-0.1(142857)')).toEqual({ nu: -4n, de: 35n })
       expect(Q.from('0.1')).toEqual({ nu: 1n, de: 10n })
       expect(Q.from('0.0(9)')).toEqual({ nu: 1n, de: 10n })
       expect(Q.from('0.1(0)')).toEqual({ nu: 1n, de: 10n })
