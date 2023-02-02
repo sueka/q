@@ -2,6 +2,8 @@ import * as assert from 'assert'
 import abs from './abs'
 import gcd from './gcd'
 import parse from './parse'
+import parseRd from './parseRd'
+import shouldBe from './shouldBe'
 
 interface QLike {
   nu: bigint
@@ -209,7 +211,24 @@ export default class Q {
    * @param real
    * @returns the reduced fraction equal to `real`
    */
-  static from(real: number): Q {
+  static from(real: number): Q
+
+  /**
+   * Constructs a Q object
+   *
+   * @param repeating the
+   */
+  static from(repeating: string): Q
+
+  static from(realRepeating: number | string): Q {
+    if (typeof realRepeating === 'number') {
+      return Q.#fromR(realRepeating)
+    }
+
+    return Q.#fromRepeating(realRepeating)
+  }
+
+  static #fromR(real: number): Q {
     const {
       sign = '+',
       integer,
@@ -224,6 +243,29 @@ export default class Q {
     const de = (ex < 0 ? 10n ** BigInt(-ex) : 1n)
 
     return new Q(nu, de).reduced
+  }
+
+  static #fromRepeating(repeating: string): Q {
+    const {
+      integer,
+      decimal,
+      repetend,
+    } = parseRd(repeating)
+
+    const term = Number(`${ integer }.${ decimal }`)
+
+    if (repetend === undefined) {
+      return Q.#fromR(term)
+    }
+
+    // shouldBe(repetend)
+
+    const repeat = {
+      nu: BigInt(repetend),
+      de: BigInt(10 ** decimal.length * (10 ** repetend.length - 1)),
+    }
+
+    return Q.#fromR(term).plus(Q.of(repeat))
   }
 
   // Aliases
