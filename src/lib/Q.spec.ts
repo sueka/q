@@ -1,6 +1,13 @@
 import Q from './Q'
 
 describe('Q', () => {
+  describe('Q.isQ()', () => {
+    it('works', () => {
+      expect(Q.isQ(Q.from(0.1))).toBeTruthy()
+      expect(Q.isQ(1)).toBeFalsy()
+    })
+  })
+
   describe('Q.of() the factory method', () => {
     it('works with one argument', () => {
       expect(Q.of(4n)).toMatchObject({ nu: 4n, de: 1n })

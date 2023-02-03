@@ -41,6 +41,12 @@ export default class Q {
     return nu / de
   }
 
+  #brand: any
+
+  static isQ(arg: any): arg is Q {
+    return typeof arg === 'object' && arg !== null && #brand in arg
+  }
+
   /**
    * Calculates a total of `this` and `that`.
    *
