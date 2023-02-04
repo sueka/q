@@ -1,6 +1,7 @@
 import * as assert from 'assert'
 import abs from './abs'
 import gcd from './gcd'
+import isNumberString from './isNumberString'
 import parse from './parse'
 import parseRd from './parseRd'
 import shouldBe from './shouldBe'
@@ -217,7 +218,7 @@ export default class Q {
    * @param real
    * @returns the reduced fraction equal to `real`
    */
-  static from(real: number): Q
+  static from(real: NumberString): Q
 
   /**
    * Constructs a Q object
@@ -226,21 +227,21 @@ export default class Q {
    */
   static from(repeating: string): Q
 
-  static from(realRepeating: number | string): Q {
-    if (typeof realRepeating === 'number') {
+  static from(realRepeating: NumberString | string): Q {
+    if (isNumberString(realRepeating)) {
       return Q.#fromR(realRepeating)
     }
 
     return Q.#fromRepeating(realRepeating)
   }
 
-  static #fromR(real: number): Q {
+  static #fromR(real: NumberString): Q {
     const {
       sign = '+',
       integer,
       decimal = '',
       exponent = '+0'
-    } = parse(String(real))
+    } = parse(real)
 
     const base = BigInt(`${ sign }${ integer }${ decimal }`)
     const ex = Number(exponent) - decimal.length
@@ -260,7 +261,9 @@ export default class Q {
     } = parseRd(repeating)
 
     const s = BigInt(`${ sign }1`)
-    const term = Number(`${ integer }.${ decimal }`)
+    const term = `${ integer }.${ decimal }`
+
+    assert(isNumberString(term))
 
     if (repetend === undefined) {
       return Q.#fromR(term)

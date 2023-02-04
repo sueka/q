@@ -3,7 +3,7 @@ import Q from './Q'
 describe('Q', () => {
   describe('Q.isQ()', () => {
     it('works', () => {
-      expect(Q.isQ(Q.from(0.1))).toBeTruthy()
+      expect(Q.isQ(Q.from('0.1'))).toBeTruthy()
       expect(Q.isQ(1)).toBeFalsy()
     })
   })
@@ -24,13 +24,13 @@ describe('Q', () => {
 
   describe('Q.from() the factory method', () => {
     it('converts floats to rationals', () => {
-      expect(Q.from(3.14)).toMatchObject({ nu: 157n, de: 50n })
-      expect(Q.from(6.62607015e-34)).toMatchObject({ nu: 132521403n, de: 2n * 10n ** 41n })
+      expect(Q.from('3.14')).toMatchObject({ nu: 157n, de: 50n })
+      expect(Q.from('6.62607015e-34')).toMatchObject({ nu: 132521403n, de: 2n * 10n ** 41n })
     })
 
     it('fails with a non-finite argument', () => {
-      expect(() => Q.from(NaN)).toThrowError()
-      expect(() => Q.from(Infinity)).toThrowError()
+      expect(() => Q.from('NaN')).toThrowError()
+      expect(() => Q.from('Infinity')).toThrowError()
     })
 
     it('converts repeating decimals to rationals', () => {
