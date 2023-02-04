@@ -1,6 +1,6 @@
 {
   "name": "@sueka/q",
-  "version": "0.24.0",
+  "version": "0.24.1",
   "description": "A ℚ library",
   "files": [
     "dist",

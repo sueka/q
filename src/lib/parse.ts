@@ -9,7 +9,7 @@ interface ParseResult {
 }
 
 export default function parse(real: NumberString): ParseResult {
-  const pattern = /^(?<sign>\+|-)?(?<integer>\d+)(\.(?<decimal>\d+))?(e(?<exponent>(\+|-)?\d+))?$/
+  const pattern = /^(?<sign>\+|-)?(?<integer>\d+)(\.(?<decimal>\d*))?(e(?<exponent>(\+|-)?\d+))?$/
   const result = pattern.exec(real)
 
   shouldBe(result?.groups) // NaN, Infinity and -Infinity
