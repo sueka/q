@@ -43,6 +43,27 @@ describe('Q', () => {
     })
   })
 
+  describe('toString()', () => {
+    it('works', () => {
+      expect(`${ Q.of(1n, 2n) }`).toBe('1/2')
+      expect(`${ Q.of(10n) }`).toBe('10')
+    })
+  })
+
+  describe('toDouble()', () => {
+    it('works', () => {
+      expect(Q.of(2n, 3n).toDouble()).toBe(2 / 3)
+    })
+
+    it('fails if it has an Infinity', () => {
+      expect(() => Q.of(1n, 2n * 10n ** 308n).toDouble()).toThrowErrorMatchingInlineSnapshot(`"Numerator or denominator too large."`)
+      expect(() => Q.of(2n * 10n ** 308n, 3n).toDouble()).toThrowErrorMatchingInlineSnapshot(`"Numerator or denominator too large."`)
+      expect(() => Q.of(2n * 10n ** 308n, 11n ** 308n).toDouble()).toThrowErrorMatchingInlineSnapshot(`"Numerator or denominator too large."`)
+
+      expect(() => Q.of(2n * 10n ** 308n, 2n).toDouble()).not.toThrowError()
+    })
+  })
+
   describe('plus(), minus(), times() and dividedBy()', () => {
     it('works', () => {
       expect(Q.of(1n, 2n).plus(Q.of(2n, 5n))).toMatchObject({ nu: 9n, de: 10n })
@@ -68,6 +89,39 @@ describe('Q', () => {
 
     it('sees zero to the power of zero is one', () => {
       expect(Q.of(0n).toPowerOf(0)).toMatchObject({ nu: 1n, de: 1n })
+    })
+
+    it('is not yet supported real exponents', () => {
+      expect(() => Q.of(2n, 3n).toPowerOf(0.5)).toThrowError()
+    })
+
+    it('does not accept unsafe integers', () => {
+      expect(() => Q.of(2n, 3n).toPowerOf(2 ** 53)).toThrowError()
+    })
+  })
+
+  describe('compare', () => {
+    it('works', () => {
+      expect(Q.of(1n, 2n).equals(Q.from('0.5'))).toBeTruthy()
+      expect(Q.of(5000000000000000n, 9999999999999999n).isNotEqualTo(Q.from('0.5'))).toBeTruthy()
+      // expect(5000000000000000 / 9999999999999999 !== 0.5).toBeFalsy()
+      expect(Q.of(1n, 2n).isLessThan(Q.from('0.(6)'))).toBeTruthy()
+      expect(Q.of(1n, 2n).isLessThanOrEqualTo(Q.from('0.4(9)'))).toBeTruthy()
+      expect(Q.of(1n, 2n).isGreaterThan(Q.from('0.(3)'))).toBeTruthy()
+      expect(Q.of(1n, 2n).isGreaterThanOrEqualTo(Q.from('0.5(0)'))).toBeTruthy()
+    })
+  })
+
+  describe('reciprocal', () => {
+    it('works', () => {
+      expect(Q.of(2n).reciprocal).toEqual({ nu: 1n, de: 2n })
+      expect(() => Q.of(0n).reciprocal).toThrowErrorMatchingInlineSnapshot(`"Reciprocal of zero does not exist."`)
+    })
+  })
+
+  describe('opposite', () => {
+    it('works', () => {
+      expect(Q.of(2n).opposite).toEqual({ nu: -2n, de: 1n })
     })
   })
 })

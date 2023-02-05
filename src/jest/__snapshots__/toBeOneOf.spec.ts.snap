@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Matchers#toBeOneOf() has a neat error message 1`] = `
+"[2mexpect([22m[31mreceived[39m[2m)[22m.toBeOneOf[2m([22m[32mexpected[39m[2m) // includes[22m
+
+Expected array: [32m[[2, 3, 5, 7]][39m
+Received value: [31m1[39m"
+`;
