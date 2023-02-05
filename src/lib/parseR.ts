@@ -8,7 +8,7 @@ interface ParseResult {
   exponent?: string // from -324 to +308 except from -6 to +20
 }
 
-export default function parse(real: NumberString): ParseResult {
+export default function parseR(real: NumberString): ParseResult {
   const pattern = /^(?<sign>\+|-)?(?<integer>\d+)(\.(?<decimal>\d*))?(e(?<exponent>(\+|-)?\d+))?$/
   const result = pattern.exec(real)
 

@@ -2,8 +2,8 @@ import * as assert from 'assert'
 import abs from './abs'
 import gcd from './gcd'
 import isNumberString from './isNumberString'
-import parse from './parse'
-import parseRd from './parseRd'
+import parseR from './parseR'
+import parseRepeating from './parseRepeating'
 
 interface QLike {
   nu: bigint
@@ -240,7 +240,7 @@ export default class Q {
       integer,
       decimal = '',
       exponent = '+0'
-    } = parse(real)
+    } = parseR(real)
 
     const base = BigInt(`${ sign }${ integer }${ decimal }`)
     const ex = Number(exponent) - decimal.length
@@ -257,7 +257,7 @@ export default class Q {
       integer,
       decimal,
       repetend,
-    } = parseRd(repeating)
+    } = parseRepeating(repeating)
 
     const s = BigInt(`${ sign }1`)
     const term = `${ integer }.${ decimal }`

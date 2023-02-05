@@ -12,7 +12,7 @@ interface ParseResult {
  *
  * @param repeating the repeating decimal in the parentheses notation
  */
-export default function parseRd(repeating: string): ParseResult {
+export default function parseRepeating(repeating: string): ParseResult {
   const pattern = /^(?<sign>\+|-)?(?<integer>\d+)\.(?<decimal>\d*)(\((?<repetend>\d+)\))?$/
   const result = pattern.exec(repeating)
 
