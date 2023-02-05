@@ -11,7 +11,7 @@ dist : tsconfig.json $(src)
 	$(NPX) tsc --project $<
 
 check : jest.config.mjs $(src)
-	$(NPX) jest --config $<
+	$(NPX) jest --config $< --color
 
 docs : typedoc.js $(src)
 	$(NPX) typedoc --options $<
