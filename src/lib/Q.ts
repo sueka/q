@@ -266,7 +266,7 @@ export default class Q {
     assert(isNumberString(term))
 
     if (repetend === undefined) {
-      return Q.#fromR(term)
+      return Q.#fromR(term) // FIXME: Unreachable?
     }
 
     // shouldBe(repetend)
