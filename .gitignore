@@ -6,6 +6,9 @@
 # tsc
 *.js
 
+# jest
+/coverage/
+
 # typedoc
 /docs/
 !/typedoc.js
