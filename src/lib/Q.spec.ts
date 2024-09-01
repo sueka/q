@@ -109,6 +109,10 @@ describe('Q', () => {
       expect(Q.of(1n, 2n).isLessThanOrEqualTo(Q.from('0.4(9)'))).toBeTruthy()
       expect(Q.of(1n, 2n).isGreaterThan(Q.from('0.(3)'))).toBeTruthy()
       expect(Q.of(1n, 2n).isGreaterThanOrEqualTo(Q.from('0.5(0)'))).toBeTruthy()
+      expect(Q.of(-1n, 2n).isGreaterThan(Q.from('-0.(6)'))).toBeTruthy()
+      expect(Q.of(-1n, 2n).isGreaterThanOrEqualTo(Q.from('-0.4(9)'))).toBeTruthy()
+      expect(Q.of(-1n, 2n).isLessThan(Q.from('-0.(3)'))).toBeTruthy()
+      expect(Q.of(-1n, 2n).isLessThanOrEqualTo(Q.from('-0.5(0)'))).toBeTruthy()
     })
   })
 
